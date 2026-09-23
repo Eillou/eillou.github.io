@@ -1,0 +1,717 @@
+<!doctype html><html lang="es"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Portafolio José Carrillo</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<style>
+/* ===== vista en blanco (por defecto) ===== */
+:root{
+  --ground:#ffffff;
+  --surface:#f8fafd;
+  --sunk:#edf2f9;
+  --ink:#0d1a2b;
+  --muted:#54677f;
+  --rule:#dce5f1;
+  --rule-soft:#e9eff7;
+
+  --cloud:#0f56e8;   /* software y nube */
+  --edge:#00857c;    /* borde industrial */
+  --plant:#d06a04;   /* planta y señal */
+  --ok:#0a8f52;
+
+  --cloud-wash:#e4ecff;
+  --edge-wash:#daf1ef;
+  --plant-wash:#fdeadb;
+  --shadow:0 1px 2px rgba(13,26,43,.05),0 8px 24px rgba(13,26,43,.06);
+  --shadow-lift:0 2px 4px rgba(13,26,43,.06),0 16px 40px rgba(13,26,43,.10);
+
+  --focus:#0f56e8;
+  color-scheme:light;
+
+  --step-0:1rem;
+  --step-1:1.15rem;
+  --step-2:1.5rem;
+  --step-3:2.1rem;
+  --step-4:clamp(2.6rem,7vw,4.6rem);
+}
+/* la vista oscura existe, pero solo si el visitante la pide con el interruptor */
+:root[data-theme="dark"]{
+  --ground:#07101d;
+  --surface:#0f1c2e;
+  --sunk:#0a1524;
+  --ink:#e7eefa;
+  --muted:#8ea4c2;
+  --rule:#1d3149;
+  --rule-soft:#152538;
+  --cloud:#5b96ff;
+  --edge:#2ecfbf;
+  --plant:#ffa645;
+  --ok:#3ddc94;
+  --cloud-wash:#11243f;
+  --edge-wash:#0d2f2c;
+  --plant-wash:#33230f;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+  --shadow-lift:0 2px 4px rgba(0,0,0,.45),0 16px 40px rgba(0,0,0,.5);
+  --focus:#5b96ff;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box;}
+body{
+  background:var(--ground);
+  color:var(--ink);
+  font-family:"Source Serif 4",Georgia,"Times New Roman",serif;
+  font-size:var(--step-0);
+  line-height:1.6;
+  margin:0;
+}
+.wrap{max-width:74rem;margin:0 auto;padding-inline:20px;padding-block:0;}
+a{color:inherit;}
+a:focus-visible,button:focus-visible{outline:2px solid var(--focus);outline-offset:3px;}
+
+.tag{
+  font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:.7rem;font-weight:500;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);
+}
+h1,h2,h3{font-family:"Archivo",system-ui,-apple-system,"Helvetica Neue",sans-serif;text-wrap:balance;margin:0;}
+
+/* ===== barra de progreso de lectura ===== */
+#prog{
+  position:fixed;left:0;top:env(safe-area-inset-top,0px);height:3px;width:100%;
+  transform:scaleX(0);transform-origin:0 50%;
+  background:linear-gradient(90deg,var(--plant),var(--edge) 55%,var(--cloud));
+  z-index:60;
+}
+
+/* ===== interruptor de vista ===== */
+.topbar{
+  position:fixed;right:16px;top:calc(env(safe-area-inset-top,0px) + 14px);z-index:61;
+  display:flex;gap:8px;
+}
+.topbar a{
+  display:inline-flex;align-items:center;
+  font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:var(--surface);border:1px solid var(--rule);
+  padding:7px 11px;border-radius:999px;box-shadow:var(--shadow);text-decoration:none;
+  transition:color .2s,border-color .2s,transform .2s;
+}
+.topbar a:hover{color:var(--cloud);border-color:var(--cloud);transform:translateY(-1px);}
+#themer{
+  display:inline-flex;align-items:center;gap:7px;
+  font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:var(--surface);border:1px solid var(--rule);
+  padding:7px 11px;cursor:pointer;border-radius:999px;box-shadow:var(--shadow);
+  transition:color .2s,border-color .2s,transform .2s;
+}
+#themer:hover{color:var(--cloud);border-color:var(--cloud);transform:translateY(-1px);}
+#themer .sw{width:8px;height:8px;border-radius:50%;background:var(--cloud);}
+
+/* ===== revelado por viñetas ===== */
+.vi{opacity:1;}
+html.anim .vi{opacity:0;transform:translateY(16px);}
+html.anim .vi.in{
+  opacity:1;transform:none;
+  transition:opacity .55s cubic-bezier(.22,.7,.3,1),transform .55s cubic-bezier(.22,.7,.3,1);
+  transition-delay:calc(var(--d,0) * 70ms);
+}
+html.anim svg .vi{transform:none;}
+
+/* ===== portada ===== */
+.plate{border-bottom:1px solid var(--rule);padding-block:clamp(40px,8vw,74px) clamp(28px,5vw,44px);}
+.plate .tag{display:block;margin-bottom:18px;color:var(--cloud);}
+h1{font-size:var(--step-4);font-weight:800;letter-spacing:-.035em;line-height:.95;}
+h1 .sub{display:block;font-size:.34em;font-weight:600;letter-spacing:-.01em;color:var(--muted);margin-top:16px;line-height:1.25;}
+.plate .role{
+  font-family:"Archivo",system-ui,sans-serif;font-weight:500;font-size:var(--step-1);
+  color:var(--muted);margin:16px 0 0;max-width:38ch;line-height:1.35;
+}
+.plate .thesis{margin:26px 0 0;max-width:58ch;font-size:var(--step-1);line-height:1.55;}
+.plate .thesis em{font-style:italic;color:var(--plant);}
+.zones{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px;}
+.zones span{
+  font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:5px 10px;border:1px solid var(--c);color:var(--c);background:var(--w);border-radius:999px;
+}
+.meta{display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:26px;padding-top:18px;border-top:1px solid var(--rule-soft);}
+.meta span,.meta a{font-family:"IBM Plex Mono",monospace;font-size:.78rem;color:var(--muted);text-decoration:none;}
+.meta a{border-bottom:1px solid transparent;transition:color .18s,border-color .18s;}
+.meta a:hover{color:var(--cloud);border-bottom-color:var(--cloud);}
+
+@media (max-width:600px){.plate{padding-top:76px;}}
+/* ===== secciones ===== */
+section{padding-block:clamp(38px,6vw,68px);border-bottom:1px solid var(--rule);}
+.shead{display:flex;align-items:center;gap:16px;margin-bottom:26px;}
+.shead .tag{white-space:nowrap;color:var(--cloud);}
+.shead .bar{flex:1;height:2px;background:var(--cloud);opacity:.3;transform:scaleX(0);transform-origin:0 50%;}
+.shead .bar.in{transform:scaleX(1);transition:transform .9s cubic-bezier(.22,.7,.3,1);}
+h2{font-size:var(--step-3);font-weight:800;letter-spacing:-.025em;line-height:1.05;margin-bottom:10px;}
+.lede{max-width:62ch;color:var(--muted);margin:0 0 4px;}
+
+/* ===== cadena de señal ===== */
+.chainbox{overflow-x:auto;padding-block:8px 4px;margin-top:22px;}
+.chainbox svg{display:block;min-width:720px;max-width:100%;height:auto;}
+.flow{stroke-dasharray:5 4;}
+html.motion .flow{animation:march 1.1s linear infinite;}
+@keyframes march{to{stroke-dashoffset:-18;}}
+.pkt{opacity:0;}
+html.motion .pkt{opacity:1;animation:pkt 2.4s cubic-bezier(.45,0,.55,1) infinite;}
+@keyframes pkt{0%{transform:translateX(0);opacity:0}12%{opacity:1}88%{opacity:1}100%{transform:translateX(26px);opacity:0}}
+.chain-note{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px 32px;margin-top:26px;}
+.chain-note p{margin:0;font-size:.92rem;color:var(--muted);padding-left:14px;border-left:2px solid var(--rule);}
+.chain-note p.k-plant{border-left-color:var(--plant);}
+.chain-note p.k-edge{border-left-color:var(--edge);}
+.chain-note p.k-cloud{border-left-color:var(--cloud);}
+.chain-note b{display:block;font-family:"Archivo",sans-serif;font-weight:600;font-size:.82rem;letter-spacing:.04em;color:var(--ink);margin-bottom:3px;}
+
+/* ===== lazos (proyectos) ===== */
+.loop{padding-block:clamp(26px,4vw,38px);border-top:1px solid var(--rule-soft);}
+.loop:first-of-type{border-top:0;padding-top:4px;}
+.loop-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;}
+.loop-head .code{
+  font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:.76rem;letter-spacing:.1em;
+  padding:3px 8px;color:var(--c);background:var(--w);border:1px solid var(--c);border-radius:4px;
+}
+.loop-head .fn{color:var(--muted);font-size:.88rem;font-style:italic;}
+h3{font-size:var(--step-2);font-weight:600;letter-spacing:-.02em;}
+.k-cloud{--c:var(--cloud);--w:var(--cloud-wash);}
+.k-edge{--c:var(--edge);--w:var(--edge-wash);}
+.k-plant{--c:var(--plant);--w:var(--plant-wash);}
+.loop-body{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:28px 44px;margin-top:16px;align-items:start;}
+@media (max-width:760px){.loop-body{grid-template-columns:1fr;gap:22px;}}
+.prose p{margin:0 0 12px;max-width:64ch;}
+.prose p:last-child{margin-bottom:0;}
+.prose strong{font-weight:600;}
+code{font-family:"IBM Plex Mono",monospace;font-size:.85em;background:var(--sunk);padding:1px 5px;border-radius:3px;}
+
+.spec{
+  background:var(--surface);border:1px solid var(--rule);
+  border-top:3px solid var(--c,var(--cloud));padding:16px 18px;border-radius:0 0 6px 6px;
+  box-shadow:var(--shadow);transition:box-shadow .3s,transform .3s;
+}
+.spec:hover{box-shadow:var(--shadow-lift);transform:translateY(-3px);}
+.spec dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:7px 14px;}
+.spec dt{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:3px;white-space:nowrap;}
+.spec dd{margin:0;font-family:"IBM Plex Mono",monospace;font-size:.8rem;font-variant-numeric:tabular-nums;line-height:1.45;}
+.spec dd .u{color:var(--muted);}
+
+/* ===== registro ===== */
+.counts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:22px;}
+.counts div{
+  background:var(--surface);padding:20px 18px;border:1px solid var(--rule);
+  border-top:3px solid var(--cloud);border-radius:0 0 6px 6px;box-shadow:var(--shadow);
+  transition:box-shadow .3s,transform .3s;
+}
+.counts div:hover{box-shadow:var(--shadow-lift);transform:translateY(-3px);}
+.counts div:last-child{border-top-color:var(--ok);}
+.counts div:last-child b{color:var(--ok);}
+.counts b{display:block;font-family:"Archivo",sans-serif;font-weight:800;font-size:2.3rem;letter-spacing:-.035em;font-variant-numeric:tabular-nums;line-height:1;color:var(--cloud);}
+.counts span{display:block;margin-top:8px;font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);line-height:1.4;}
+
+/* ===== herramienta ===== */
+.stack{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px 40px;margin-top:24px;}
+.stack h4{font-family:"Archivo",sans-serif;font-size:.74rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--c,var(--cloud));margin:0 0 9px;padding-bottom:7px;border-bottom:2px solid var(--c,var(--cloud));}
+.stack ul{margin:0;padding:0;list-style:none;}
+.stack li{font-family:"IBM Plex Mono",monospace;font-size:.78rem;color:var(--muted);padding:3px 0;line-height:1.45;transition:color .2s,padding-left .2s;}
+.stack li:hover{color:var(--c,var(--cloud));padding-left:5px;}
+
+/* ===== cierre ===== */
+.close{border-bottom:0;}
+.close h2{font-size:var(--step-2);}
+.close-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px 44px;}
+.close p{margin:0 0 10px;max-width:52ch;}
+.edu b{display:block;font-family:"Archivo",sans-serif;font-weight:600;font-size:.95rem;margin-top:14px;}
+.edu span{font-family:"IBM Plex Mono",monospace;font-size:.76rem;color:var(--muted);}
+.contact-list{flex-direction:column;gap:9px;border-top:0;padding-top:4px;margin-top:0;}
+.foot{padding-block:26px 40px;}
+.foot p{margin:0;font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.06em;color:var(--muted);}
+
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ok);margin-right:7px;vertical-align:.08em;}
+html.motion .dot{animation:pulse 2.6s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ===== sin movimiento: todo quieto y visible ===== */
+@media (prefers-reduced-motion:reduce){
+  html.anim .vi{opacity:1;transform:none;}
+  html.anim .vi.in{transition:none;}
+  .shead .bar{transform:scaleX(1);}
+  .shead .bar.in{transition:none;}
+  .spec:hover,.counts div:hover{transform:none;}
+}
+</style>
+<script>
+(function(){
+  var d = document.documentElement;
+  d.classList.add("anim");
+  var saved = null;
+  try { saved = localStorage.getItem("vista"); } catch(e){}
+  d.setAttribute("data-theme", saved === "dark" ? "dark" : "light");
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) d.classList.add("motion");
+})();
+</script>
+
+<div id="prog"></div>
+<div class="topbar">
+  <a href="../" hreflang="en" lang="en">English</a>
+  <a href="../cv.pdf">Ver CV</a>
+  <button id="themer" type="button" aria-pressed="false"><span class="sw"></span><span id="themer-l">Vista oscura</span></button>
+</div>
+
+<div class="wrap">
+
+  <header class="plate">
+    <span class="tag vi">Portafolio profesional · José Eduardo Carrillo Peniche</span>
+    <h1 class="vi" style="--d:1">Lazo Cerrado<span class="sub">Del transmisor en el tanque a la máquina de estados en AWS</span></h1>
+    <p class="role vi" style="--d:2">Backend &amp; Cloud Engineer — pipelines distribuidos, IoT industrial y SCADA</p>
+    <p class="thesis vi" style="--d:3">
+      Trabajo el tramo completo: el transmisor de 4–20 mA, el Modbus que lo lee, la corrección volumétrica
+      que convierte ese nivel en un neto fiscal, la cola que aguanta treinta días sin enlace, y las Step
+      Functions que al otro lado cierran el mes. <em>Nada de eso se da por bueno en una pantalla</em> — se
+      valida junto al tanque, contra la medición física.
+    </p>
+    <div class="zones">
+      <span class="k-plant vi" style="--d:4">Planta</span>
+      <span class="k-edge vi" style="--d:5">Borde</span>
+      <span class="k-cloud vi" style="--d:6">Nube</span>
+    </div>
+    <div class="meta vi" style="--d:7">
+      <span><span class="dot"></span>Mérida, MX — remoto</span>
+      <span>Doble ciudadanía MX / EE. UU.</span>
+      <a href="mailto:jecarrillopeniche@hotmail.es">jecarrillopeniche@hotmail.es</a>
+      <a href="https://linkedin.com/in/eillou">linkedin.com/in/eillou</a>
+      <a href="https://github.com/eillou">github.com/eillou</a>
+    </div>
+  </header>
+
+  <section>
+    <div class="shead"><span class="tag">00 · Cadena de señal</span><span class="bar"></span></div>
+    <h2 class="vi">Un solo camino, de la planta al bucket</h2>
+    <p class="lede vi" style="--d:1">
+      El computador de flujo que construí. Cada caja es código o hardware que instalé, configuré o depuré
+      en sitio. Tres zonas, tres colores: <b style="color:var(--plant)">planta</b>,
+      <b style="color:var(--edge)">borde</b> y <b style="color:var(--cloud)">nube</b>. La corrección ocurre
+      en el borde, no en la nube: si el enlace se cae, el dato ya salió corregido y solo espera turno.
+    </p>
+
+    <div class="chainbox">
+      <svg viewBox="0 0 900 175" role="img" aria-label="Cadena de señal: transmisores 4-20 mA, módulo Modbus RTU de 8 canales, servicio de lectura que corrige el volumen, broker Mosquitto local, HMI FUXA, reenviador con cola SQLite de 30 días y AWS IoT Core por TLS mutuo.">
+        <defs>
+          <marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="var(--plant)"/></marker>
+          <marker id="ae" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="var(--edge)"/></marker>
+          <marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="var(--cloud)"/></marker>
+        </defs>
+
+        <g font-family="IBM Plex Mono, monospace">
+          <text x="2" y="20" fill="var(--plant)" font-size="8.5" letter-spacing="1.4" class="vi">CAMPO</text>
+          <text x="300" y="20" fill="var(--edge)" font-size="8.5" letter-spacing="1.4" class="vi" style="--d:3">BORDE · RASPBERRY ED-HMI3020</text>
+          <text x="750" y="20" fill="var(--cloud)" font-size="8.5" letter-spacing="1.4" class="vi" style="--d:8">NUBE</text>
+
+          <g class="vi">
+            <rect x="2" y="34" width="120" height="56" fill="var(--surface)" stroke="var(--rule)"/>
+            <rect x="2" y="34" width="120" height="3" fill="var(--plant)"/>
+            <text x="14" y="57" fill="var(--plant)" font-size="8.5" letter-spacing="1.2">TT / LT</text>
+            <text x="14" y="72" fill="var(--ink)" font-size="10.5">Transmisores</text>
+            <text x="14" y="84" fill="var(--muted)" font-size="9">4–20 mA</text>
+          </g>
+          <g class="vi" style="--d:1">
+            <line x1="124" y1="62" x2="150" y2="62" stroke="var(--plant)" stroke-width="1.5" marker-end="url(#ap)" class="flow"/>
+            <circle cx="126" cy="62" r="2.6" fill="var(--plant)" class="pkt"/>
+          </g>
+
+          <g class="vi" style="--d:2">
+            <rect x="150" y="34" width="124" height="56" fill="var(--surface)" stroke="var(--rule)"/>
+            <rect x="150" y="34" width="124" height="3" fill="var(--plant)"/>
+            <text x="162" y="57" fill="var(--plant)" font-size="8.5" letter-spacing="1.2">AI-8CH</text>
+            <text x="162" y="72" fill="var(--ink)" font-size="10.5">Módulo 8 canales</text>
+            <text x="162" y="84" fill="var(--muted)" font-size="9">Modbus RTU</text>
+          </g>
+          <g class="vi" style="--d:3">
+            <line x1="274" y1="62" x2="300" y2="62" stroke="var(--edge)" stroke-width="1.5" marker-end="url(#ae)" class="flow"/>
+            <circle cx="276" cy="62" r="2.6" fill="var(--edge)" class="pkt" style="animation-delay:.3s"/>
+          </g>
+
+          <g class="vi" style="--d:4">
+            <rect x="300" y="34" width="124" height="56" fill="var(--surface)" stroke="var(--edge)" stroke-width="1.5"/>
+            <rect x="300" y="34" width="124" height="3" fill="var(--edge)"/>
+            <text x="312" y="57" fill="var(--edge)" font-size="8.5" letter-spacing="1.2">READER</text>
+            <text x="312" y="72" fill="var(--ink)" font-size="10.5">Corrige aquí</text>
+            <text x="312" y="84" fill="var(--muted)" font-size="9">CTL · CPL · CCF</text>
+          </g>
+          <g class="vi" style="--d:5">
+            <line x1="424" y1="62" x2="450" y2="62" stroke="var(--edge)" stroke-width="1.5" marker-end="url(#ae)" class="flow"/>
+            <circle cx="426" cy="62" r="2.6" fill="var(--edge)" class="pkt" style="animation-delay:.6s"/>
+          </g>
+
+          <g class="vi" style="--d:6">
+            <rect x="450" y="34" width="124" height="56" fill="var(--surface)" stroke="var(--rule)"/>
+            <rect x="450" y="34" width="124" height="3" fill="var(--edge)"/>
+            <text x="462" y="57" fill="var(--edge)" font-size="8.5" letter-spacing="1.2">MQTT</text>
+            <text x="462" y="72" fill="var(--ink)" font-size="10.5">Mosquitto</text>
+            <text x="462" y="84" fill="var(--muted)" font-size="9">broker local</text>
+          </g>
+          <g class="vi" style="--d:7">
+            <line x1="574" y1="62" x2="600" y2="62" stroke="var(--edge)" stroke-width="1.5" marker-end="url(#ae)" class="flow"/>
+            <circle cx="576" cy="62" r="2.6" fill="var(--edge)" class="pkt" style="animation-delay:.9s"/>
+          </g>
+
+          <g class="vi" style="--d:8">
+            <rect x="600" y="34" width="124" height="56" fill="var(--surface)" stroke="var(--rule)"/>
+            <rect x="600" y="34" width="124" height="3" fill="var(--edge)"/>
+            <text x="612" y="57" fill="var(--edge)" font-size="8.5" letter-spacing="1.2">OUTBOX</text>
+            <text x="612" y="72" fill="var(--ink)" font-size="10.5">Forwarder</text>
+            <text x="612" y="84" fill="var(--muted)" font-size="9">SQLite · 30 días</text>
+          </g>
+          <g class="vi" style="--d:9">
+            <line x1="724" y1="62" x2="750" y2="62" stroke="var(--cloud)" stroke-width="1.5" marker-end="url(#ac)" class="flow"/>
+            <circle cx="726" cy="62" r="2.6" fill="var(--cloud)" class="pkt" style="animation-delay:1.2s"/>
+          </g>
+
+          <g class="vi" style="--d:10">
+            <rect x="750" y="34" width="148" height="56" fill="var(--surface)" stroke="var(--cloud)" stroke-width="1.5"/>
+            <rect x="750" y="34" width="148" height="3" fill="var(--cloud)"/>
+            <text x="762" y="57" fill="var(--cloud)" font-size="8.5" letter-spacing="1.2">mTLS · QOS 1</text>
+            <text x="762" y="72" fill="var(--ink)" font-size="10.5">AWS IoT Core</text>
+            <text x="762" y="84" fill="var(--muted)" font-size="9">telemetría · S3</text>
+          </g>
+
+          <path d="M497 92 L497 140 L456 140" fill="none" stroke="var(--edge)" stroke-width="1.5" marker-end="url(#ae)" class="flow vi" style="--d:11"/>
+          <g class="vi" style="--d:12">
+            <rect x="300" y="104" width="156" height="50" fill="var(--surface)" stroke="var(--rule)"/>
+            <rect x="300" y="104" width="156" height="3" fill="var(--edge)"/>
+            <text x="312" y="124" fill="var(--edge)" font-size="8.5" letter-spacing="1.2">HMI</text>
+            <text x="312" y="139" fill="var(--ink)" font-size="10.5">HMI FUXA</text>
+            <text x="312" y="150" fill="var(--muted)" font-size="9">7 vistas · 1280×800</text>
+            <text x="466" y="152" fill="var(--muted)" font-size="9">suscribe,</text>
+            <text x="466" y="164" fill="var(--muted)" font-size="9">y escribe comandos</text>
+          </g>
+        </g>
+      </svg>
+    </div>
+
+    <div class="chain-note">
+      <p class="k-plant vi"><b>El dato sale corregido</b>Elemento terciario: la cubicación y la corrección por temperatura y presión ocurren antes del broker, no en un Lambda del otro lado.</p>
+      <p class="k-edge vi" style="--d:1"><b>El enlace es opcional</b>Una bitácora SQLite guarda 30 días y drena en orden cuando el enlace vuelve. La planta no deja de medir porque se cayó internet.</p>
+      <p class="k-cloud vi" style="--d:2"><b>El HMI también escribe</b>AUTO/MAN, bomba y setpoint viajan por MQTT, y el semáforo refleja el estado que confirmó el equipo — no lo que el panel cree haber mandado.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="tag">01 · Lo que he construido</span><span class="bar"></span></div>
+    <h2 class="vi">Cuatro sistemas en producción</h2>
+    <p class="lede vi" style="--d:1">
+      Ingeniero único o líder en dos líneas de producto en Aivara, desde 2024. Siete clientes industriales en
+      producción.
+    </p>
+
+    <article class="loop k-cloud">
+      <div class="loop-head vi">
+        <span class="code">DOC-01</span>
+        <h3>Dictalis</h3>
+        <span class="fn">automatización documental fiscal e integraciones</span>
+      </div>
+      <div class="loop-body">
+        <div class="prose">
+          <p class="vi" style="--d:1">
+            Re-arquitecturé el pipeline de OCR de Celery a <strong>AWS Step Functions</strong>: un Map por
+            documento sobre Fargate con tolerancia a fallo por ítem, así que un PDF malo ya no tumba un lote
+            de 1 500. El watchdog de Celery se reemplazó por un mecanismo de token y latido que reclama las
+            ejecuciones colgadas. Toda la infraestructura como código, en SAM/CloudFormation.
+          </p>
+          <p class="vi" style="--d:2">
+            La IA que lee los documentos es intercambiable detrás de una sola interfaz: el switch
+            <code>OCR_BACKEND</code> elige un motor de OCR propio o <strong>AWS Textract</strong>,
+            que además sirve de camino alterno cuando el motor primario no resuelve un documento. Cambiar
+            de motor es configuración, no un rediseño.
+          </p>
+          <p class="vi" style="--d:3">
+            La generación del documento oficial pasó de un render improvisado a un motor DOCX→PDF controlado
+            (LibreOffice headless dentro de la imagen del worker) que produce el layout exacto que exige el
+            Anexo del SAT, con bloque de sello digital y folio oficial sin huecos.
+            <strong>Pasa cumplimiento sin una sola edición manual.</strong>
+          </p>
+        </div>
+        <div class="spec vi" style="--d:2">
+          <dl>
+            <dt>Rendimiento</dt><dd>1 500 PDFs + conciliación<br><span class="u">extremo a extremo, ~40 min</span></dd>
+            <dt>Orquestación</dt><dd>Step Functions · Map<br><span class="u">Fargate, fallo por ítem</span></dd>
+            <dt>OCR</dt><dd>OCR propio · AWS Textract<br><span class="u">intercambiable</span></dd>
+            <dt>Salida</dt><dd>DOCX→PDF controlado<br><span class="u">sello + folio SAT</span></dd>
+            <dt>Garantías</dt><dd>idempotencia de worker<br><span class="u">sin doble envío al SAT</span></dd>
+                      </dl>
+        </div>
+      </div>
+    </article>
+
+    <article class="loop k-edge">
+      <div class="loop-head vi">
+        <span class="code">FLD-02</span>
+        <h3>Computador de flujo &amp; SCADA</h3>
+        <span class="fn">elemento terciario sobre Raspberry, HMI FUXA generado por código</span>
+      </div>
+      <div class="loop-body">
+        <div class="prose">
+          <p class="vi" style="--d:1">
+            La cadena de arriba, montada en un panel ED-HMI3020 de 10.1" con modo kiosco, watchdog y
+            arranque automático. El motor de corrección implementa <strong>API MPMS 11.2.4 y 21.2</strong>
+            —CTL, CPL y su producto CCF— y lo porté a Go.
+          </p>
+          <p class="vi" style="--d:2">
+            La aceptación del port no fueron los 18 ejemplos publicados del estándar: esos ya habían dejado
+            pasar una vez un truncamiento de <code>gamma60</code> a cinco decimales. La compuerta fue la
+            <strong>equivalencia contra el motor de referencia sobre todo el dominio</strong> — 755 820
+            casos de CTL, cero diferencias.
+          </p>
+          <p class="vi" style="--d:3">
+            El tablero no se dibuja en el editor de FUXA: un script idempotente arma el proyecto entero
+            —dispositivo MQTT, 20 tags y 7 vistas— y lo publica por su API, así que el HMI vive en control
+            de versiones y se revisa en un PR. Las vistas incluyen un <strong>DTI ISA-5.1 por tanque</strong>
+            y se paginan solas a cualquier número de tanques desde un único archivo de configuración.
+          </p>
+          <p class="vi" style="--d:4">
+            Cada build verifica que nada se salga del lienzo de 1280×800 y <strong>aborta si algo se
+            sale</strong>: en kiosco no hay barra de desplazamiento, así que lo que se sale no existe y no da
+            ningún error. Esa comprobación atrapó cinco fallos de layout que solo aparecen pasados los tres
+            tanques, y descubrió que FUXA recortaba los últimos 46 px de cada vista al ocultar su cabecera
+            — el DOM estaba bien, solo se veía palpando el lienzo punto por punto.
+          </p>
+        </div>
+        <div class="spec vi" style="--d:2">
+          <dl>
+            <dt>Adquisición</dt><dd>4–20 mA → Modbus RTU<br><span class="u">módulo de 8 canales</span></dd>
+            <dt>Cómputo</dt><dd>CTL · CPL · CCF en sitio<br><span class="u">API MPMS 11.2.4 / 21.2</span></dd>
+            <dt>Port a Go</dt><dd>755 820 casos CTL<br><span class="u">0 diferencias</span></dd>
+            <dt>Cubicación</dt><dd>13 956 casos<br><span class="u">0 diferencias</span></dd>
+            <dt>Autonomía</dt><dd>30 días sin enlace<br><span class="u">outbox SQLite, en orden</span></dd>
+            <dt>HMI</dt><dd>7 vistas · 20 tags<br><span class="u">generadas por script</span></dd>
+            <dt>Lienzo</dt><dd>1280×800 exactos<br><span class="u">el build falla si desborda</span></dd>
+            <dt>Validación</dt><dd>una semana en sitio<br><span class="u">contra el tanque físico</span></dd>
+          </dl>
+        </div>
+      </div>
+    </article>
+
+    <article class="loop k-plant">
+      <div class="loop-head vi">
+        <span class="code">KEP-03</span>
+        <h3>KEPServerEX → AWS</h3>
+        <span class="fn">señales analógicas de planta hacia la nube</span>
+      </div>
+      <div class="loop-body">
+        <div class="prose">
+          <p class="vi" style="--d:1">
+            Lectura de tags del <strong>IoT Gateway de KEPServerEX</strong> por HTTP contra el servidor real
+            en la red de planta, y aterrizaje en S3 particionado por la <strong>fecha del dato</strong>, no la
+            de subida — la diferencia entre un particionado que sirve para consultar y uno que solo sirve
+            para archivar. Un registro mal formado se reporta y se salta; no aborta el lote.
+          </p>
+          <p class="vi" style="--d:2">
+            Como transporte alterno, un publicador a <strong>AWS IoT Core</strong> por MQTT con TLS mutuo y
+            QoS 1, empaquetado en Docker. Y un simulador sin hardware, para ejercitar el pipeline completo
+            sin depender de acceso a la planta ni a la VPN.
+          </p>
+        </div>
+        <div class="spec vi" style="--d:2">
+          <dl>
+            <dt>Origen</dt><dd>KEPServerEX<br><span class="u">IoT Gateway, HTTP</span></dd>
+            <dt>Destino A</dt><dd>S3 · YYYY/MM/DD<br><span class="u">por fecha del evento</span></dd>
+            <dt>Destino B</dt><dd>AWS IoT Core<br><span class="u">mTLS · QoS 1 · Docker</span></dd>
+            <dt>Tolerancia</dt><dd>registro inválido aislado<br><span class="u">el lote continúa</span></dd>
+            <dt>Sin hardware</dt><dd>simulador de tags<br><span class="u">1 440 registros/día</span></dd>
+          </dl>
+        </div>
+      </div>
+    </article>
+
+    <article class="loop k-cloud">
+      <div class="loop-head vi">
+        <span class="code">PNL-04</span>
+        <h3>IoT Panel</h3>
+        <span class="fn">consola de operación sobre la pasarela de telemetría</span>
+      </div>
+      <div class="loop-body">
+        <div class="prose">
+          <p class="vi" style="--d:1">
+            Once páginas de operación: comparación multi-variable con doble eje Y compartido, un módulo
+            propio de tratamiento de señal (preparar, quitar picos, suavizar), detección de ingreso por
+            subida sostenida y un grupo de cumplimiento. Construí su sistema de design tokens y con eso
+            eliminé todo el estilo incrustado.
+          </p>
+          <p class="vi" style="--d:2">
+            Después del despliegue acompañé la estabilización de los <strong>siete clientes</strong>: dos o
+            tres semanas de validación diaria cada uno —unas quince semanas-cliente— como punto técnico único
+            de contacto. <strong>Cero clientes perdidos por un despliegue fallido</strong>; los casos borde
+            que salieron ahí entraron al backlog como correcciones tempranas en vez de incidentes tardíos.
+          </p>
+        </div>
+        <div class="spec vi" style="--d:2">
+          <dl>
+            <dt>Alcance</dt><dd>11 páginas de operación</dd>
+            <dt>Señal</dt><dd>EWMA + mediana<br><span class="u">despiking, eventos</span></dd>
+            <dt>Estilo</dt><dd>design tokens<br><span class="u">0 estilos incrustados</span></dd>
+            <dt>Rollout</dt><dd>~15 semanas-cliente<br><span class="u">validación diaria</span></dd>
+            <dt>Resultado</dt><dd>0 bajas por despliegue</dd>
+          </dl>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section>
+    <div class="shead"><span class="tag">02 · Registro</span><span class="bar"></span></div>
+    <h2 class="vi">Catorce meses, contados</h2>
+    <p class="lede vi" style="--d:1">Lo entregado en Aivara hasta hoy, sobre siete sistemas que generan ingreso.</p>
+    <div class="counts">
+      <div class="vi"><b data-n="177">177</b><span>Funcionalidades entregadas</span></div>
+      <div class="vi" style="--d:1"><b data-n="98">98</b><span>Correcciones de seguridad y calidad</span></div>
+      <div class="vi" style="--d:2"><b data-n="207">207</b><span>PRs integrados</span></div>
+      <div class="vi" style="--d:3"><b data-n="7">7</b><span>Clientes en producción</span></div>
+      <div class="vi" style="--d:4"><b data-n="0">0</b><span>Bajas por despliegue</span></div>
+    </div>
+    <div class="chain-note">
+      <p class="k-plant vi" style="grid-column:1/-1;max-width:70ch"><b>Endurecimiento continuo, no un sprint aparte</b>Parcheo continuo de dependencias, políticas CSP/CORS estrictas, protección CSRF, autorización a nivel de objeto, validación de entradas y alarmas de acceso no autorizado — como parte del trabajo diario, no como un proyecto aparte.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="tag">03 · Herramienta</span><span class="bar"></span></div>
+    <h2 class="vi">Con qué trabajo</h2>
+    <div class="stack">
+      <div class="k-cloud vi">
+        <h4>Lenguajes</h4>
+        <ul><li>Python (principal)</li><li>TypeScript · Node.js (NestJS)</li><li>Go (ports a producción)</li><li>SQL</li><li>Bash</li></ul>
+      </div>
+      <div class="k-cloud vi" style="--d:1">
+        <h4>AWS</h4>
+        <ul><li>Step Functions</li><li>Lambda · Fargate / ECS</li><li>S3 (flujos prefirmados)</li><li>IoT Core</li><li>Textract</li><li>CloudWatch · alarmas y filtros</li><li>SAM / CloudFormation</li></ul>
+      </div>
+      <div class="k-plant vi" style="--d:2">
+        <h4>Industrial</h4>
+        <ul><li>Modbus RTU / TCP</li><li>Instrumentación 4–20 mA</li><li>KEPServerEX / Kepware IoT Gateway</li><li>FUXA · SCADA y HMI</li><li>DTI ISA-5.1</li><li>API MPMS 11.2.4 / 21.2</li><li>Despliegue en Raspberry Pi</li></ul>
+      </div>
+      <div class="k-cloud vi" style="--d:3">
+        <h4>Backend</h4>
+        <ul><li>FastAPI · NestJS</li><li>Integraciones REST y SOAP</li><li>Workers asíncronos · Celery · RabbitMQ</li><li>Migraciones Alembic</li><li>Idempotencia y reintentos</li></ul>
+      </div>
+      <div class="k-edge vi" style="--d:4">
+        <h4>Datos y señal</h4>
+        <ul><li>Pipelines de OCR</li><li>MQTT · Mosquitto · AWS IoT Core</li><li>TLS mutuo · QoS 1 · LWT</li><li>EWMA y filtro de mediana</li><li>Despiking · detección de eventos</li><li>Validación de integridad</li></ul>
+      </div>
+      <div class="k-edge vi" style="--d:5">
+        <h4>Práctica</h4>
+        <ul><li>Commits convencionales · revisión de PR</li><li>Automatización E2E / QA</li><li>Docker y Compose</li><li>Feature flags · runbooks</li><li>Validación en sitio con el cliente</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="close">
+    <div class="shead"><span class="tag">04 · Cierre</span><span class="bar"></span></div>
+    <div class="close-grid">
+      <div class="vi">
+        <h2>Formación</h2>
+        <div class="edu">
+          <b>Ing. en Mecatrónica</b>
+          <span>Universidad Modelo, Mérida — 2020–2024</span>
+          <b>Especialidad en Desarrollo de Software en la Nube</b>
+          <span>Tecnológico de Software — 2024–2025</span>
+        </div>
+      </div>
+      <div class="vi" style="--d:1">
+        <h2>Cómo trabajo</h2>
+        <p>
+          Bilingüe pleno (español / inglés) y autorizado para trabajar en México y Estados Unidos sin
+          patrocinio.
+        </p>
+        <p>
+          Me subo al avión. La validación en campo con el cliente es donde se cierra el círculo entre el
+          código y la realidad — y donde aparecen los casos borde que de otra forma llegan como incidentes.
+        </p>
+      </div>
+      <div class="vi" style="--d:2">
+        <h2>Contacto</h2>
+        <div class="meta contact-list">
+          <a href="mailto:jecarrillopeniche@hotmail.es">jecarrillopeniche@hotmail.es</a>
+          <a href="https://linkedin.com/in/eillou">linkedin.com/in/eillou</a>
+          <a href="https://github.com/eillou">github.com/eillou</a>
+          <span>Mérida, Yucatán — remoto</span>
+          <a href="../cv.pdf" style="color:var(--cloud);border-bottom-color:var(--cloud)">Ver el CV completo →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <p>José Eduardo Carrillo Peniche · Backend &amp; Cloud Engineer · Actualizado septiembre 2026</p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var root = document.documentElement;
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---- interruptor de vista ---- */
+  var btn = document.getElementById("themer"), lbl = document.getElementById("themer-l");
+  function paint(){
+    var dark = root.getAttribute("data-theme") === "dark";
+    lbl.textContent = dark ? "Vista en blanco" : "Vista oscura";
+    btn.setAttribute("aria-pressed", dark ? "true" : "false");
+  }
+  paint();
+  btn.addEventListener("click", function(){
+    var dark = root.getAttribute("data-theme") === "dark";
+    root.setAttribute("data-theme", dark ? "light" : "dark");
+    try { localStorage.setItem("vista", dark ? "light" : "dark"); } catch(e){}
+    paint();
+  });
+
+  /* ---- barra de progreso ---- */
+  var prog = document.getElementById("prog"), ticking = false;
+  function onScroll(){
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function(){
+      var h = document.body.scrollHeight - innerHeight;
+      prog.style.transform = "scaleX(" + (h > 0 ? Math.min(scrollY / h, 1) : 0) + ")";
+      ticking = false;
+    });
+  }
+  addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  /* ---- conteo animado ---- */
+  function countUp(el){
+    var target = parseInt(el.getAttribute("data-n"), 10);
+    if (reduce || !target){ el.textContent = target.toLocaleString("es-MX"); return; }
+    var t0 = 0, dur = 1100;
+    function step(ts){
+      if (!t0) t0 = ts;
+      var p = Math.min((ts - t0) / dur, 1);
+      var e = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * e).toLocaleString("es-MX");
+      if (p < 1) requestAnimationFrame(step);
+    }
+    el.textContent = "0";
+    requestAnimationFrame(step);
+  }
+
+  /* ---- revelado por viñetas ---- */
+  var items = document.querySelectorAll(".vi, .shead .bar");
+  function reveal(el){
+    el.classList.add("in");
+    var n = el.querySelector && el.querySelector("b[data-n]");
+    if (n && !n.dataset.done){ n.dataset.done = "1"; setTimeout(function(){ countUp(n); }, 180); }
+  }
+  function showAll(){ for (var i=0;i<items.length;i++) reveal(items[i]); }
+  if (!("IntersectionObserver" in window)) { showAll(); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting){ reveal(e.target); io.unobserve(e.target); }
+    });
+  }, { rootMargin: "0px 0px -8% 0px", threshold: 0.01 });
+  items.forEach(function(el){ io.observe(el); });
+  /* red de seguridad: nada puede quedarse invisible */
+  setTimeout(showAll, 4000);
+})();
+</script>
+
+</body></html>
