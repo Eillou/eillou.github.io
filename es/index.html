@@ -396,7 +396,7 @@ html.motion .dot{animation:pulse 2.6s ease-in-out infinite;}
 
   <section>
     <div class="shead"><span class="tag">01 · Lo que he construido</span><span class="bar"></span></div>
-    <h2 class="vi">Cuatro sistemas en producción</h2>
+    <h2 class="vi">Cinco sistemas en producción</h2>
     <p class="lede vi" style="--d:1">
       Ingeniero único o líder en dos líneas de producto en Aivara, desde 2024. Siete clientes industriales en
       producción.
@@ -549,6 +549,49 @@ html.motion .dot{animation:pulse 2.6s ease-in-out infinite;}
             <dt>Estilo</dt><dd>design tokens<br><span class="u">0 estilos incrustados</span></dd>
             <dt>Rollout</dt><dd>~15 semanas-cliente<br><span class="u">validación diaria</span></dd>
             <dt>Resultado</dt><dd>0 bajas por despliegue</dd>
+          </dl>
+        </div>
+      </div>
+    </article>
+
+    <article class="loop k-edge">
+      <div class="loop-head vi">
+        <span class="code">INT-05</span>
+        <h3>Plataforma de integraciones</h3>
+        <span class="fn">microservicios NestJS sobre RabbitMQ para ingerir datos de terceros</span>
+      </div>
+      <div class="loop-body">
+        <div class="prose">
+          <p class="vi" style="--d:1">
+            Una plataforma de microservicios pensada para que una integración nueva con un tercero se conecte
+            sin tocar el núcleo: una <strong>API de entrada</strong>, un <strong>procesador</strong>
+            que interpreta los mapeos de campos de cada cliente y despacha operaciones por
+            exchanges de petición/respuesta en <strong>RabbitMQ</strong>, y un servicio NestJS pequeño por
+            proveedor, generado desde una plantilla y un SDK compartidos. Fui uno de tres ingenieros del equipo
+            de integraciones, de marzo a septiembre de 2025.
+          </p>
+          <p class="vi" style="--d:2">
+            En la API de entrada construí la capa de acceso: un <strong>guard de API keys con permisos por
+            acción</strong> que reemplazó la vieja división desarrollador/cliente, validación contra mapeos duplicados de la misma integración y un módulo de logs que
+            rastrea cada operación. También llevé una migración del modelo de datos (renombre de tenant, borrado
+            lógico) en dos servicios, con migraciones de Sequelize sobre Postgres.
+          </p>
+          <p class="vi" style="--d:3">
+            Escribí el <strong>servicio de Sigfox</strong>, que decodifica los payloads binarios de los
+            dispositivos de la red Sigfox en mediciones, y conecté notificaciones por event emitter y Sentry
+            entre servicios. Además documenté en Swagger la autenticación, las operaciones, los tipos de entidad
+            y los logs, con un ejemplo funcional para cada endpoint.
+          </p>
+        </div>
+        <div class="spec vi" style="--d:2">
+          <dl>
+            <dt>Stack</dt><dd>NestJS · TypeScript<br><span class="u">@nestjs/microservices</span></dd>
+            <dt>Mensajería</dt><dd>RabbitMQ · amqplib<br><span class="u">exchanges petición / respuesta</span></dd>
+            <dt>Datos</dt><dd>Postgres · Sequelize<br><span class="u">migraciones versionadas</span></dd>
+            <dt>Acceso</dt><dd>API keys<br><span class="u">permisos por acción</span></dd>
+            <dt>Dispositivos</dt><dd>Sigfox<br><span class="u">decodificación de payload binario</span></dd>
+            <dt>Operación</dt><dd>Docker · Sentry · Swagger<br><span class="u">zod + class-validator</span></dd>
+            <dt>Equipo</dt><dd>3 ingenieros<br><span class="u">mar–sep 2025</span></dd>
           </dl>
         </div>
       </div>
